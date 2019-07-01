@@ -1,0 +1,25 @@
+diff -dur opencl-clang-8.0.1.orig/common_clang.cpp opencl-clang-8.0.1/common_clang.cpp
+--- opencl-clang-8.0.1.orig/common_clang.cpp	2019-06-04 15:59:30.000000000 +0200
++++ opencl-clang-8.0.1/common_clang.cpp	2019-06-27 10:24:52.000000000 +0200
+@@ -40,7 +40,7 @@
+ #include "llvm/Support/TargetSelect.h"
+ #include "llvm/Support/ManagedStatic.h"
+ #include "llvm/Support/Mutex.h"
+-#include "llvm/Support/VirtualFileSystem.h"
++#include "clang/Basic/VirtualFileSystem.h"
+ #include "clang/Basic/LangOptions.h"
+ #include "clang/Basic/Diagnostic.h"
+ #include "clang/Basic/DiagnosticIDs.h"
+@@ -215,9 +215,9 @@
+ 
+     compiler->setDiagnostics(&*Diags);
+ 
+-    auto OverlayFS = new llvm::vfs::OverlayFileSystem(
+-        llvm::vfs::getRealFileSystem());
+-    auto MemFS = new llvm::vfs::InMemoryFileSystem();
++    auto OverlayFS = new clang::vfs::OverlayFileSystem(
++        clang::vfs::getRealFileSystem());
++    auto MemFS = new clang::vfs::InMemoryFileSystem();
+     OverlayFS->pushOverlay(MemFS);
+ 
+     compiler->setVirtualFileSystem(OverlayFS);
