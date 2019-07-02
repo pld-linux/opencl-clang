@@ -12,7 +12,7 @@ Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{ver
 # Source0-md5:	cb6b746c837a6cac6c8906911b2ea9de
 Patch0:		llvm_clang_vfs.patch
 URL:		https://01.org/compute-runtime
-BuildRequires:	SPIRV-LLVM-Translator >= %{spirv_llvm_translator_version}
+BuildRequires:	SPIRV-LLVM-Translator-devel >= %{spirv_llvm_translator_version}
 BuildRequires:	clang >= %{llvm_version}
 BuildRequires:	clang-devel >= %{llvm_version}
 BuildRequires:	cmake >= 3.4.3
