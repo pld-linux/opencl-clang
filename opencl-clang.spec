@@ -1,5 +1,7 @@
 
-%define llvm_version 7.0.1
+# requires the OpenCL patches
+%define llvm_version 7.0.1-3
+
 %define spirv_llvm_translator_version 7.0.1
 
 Summary:	Intel Graphics Compute Runtime for OpenCL
@@ -31,6 +33,8 @@ SPIR-V modules.
 Summary:	Header files for %{name} library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki %{name}
 Group:		Development/Libraries
+Requires:	clang-devel >= %{llvm_version}
+Requires:	llvm-devel >= %{llvm_version}
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
