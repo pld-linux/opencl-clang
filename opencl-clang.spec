@@ -52,6 +52,7 @@ cd build
 	-DPREFERRED_LLVM_VERSION="%{llvm_version}" \
 	-DLLVMSPIRV_INCLUDED_IN_LLVM=OFF \
 	-DSPIRV_TRANSLATOR_DIR="%{_prefix}" \
+	-DGIT_EXECUTABLE=/bin/false \
 	../
 %{__make}
 
