@@ -1,6 +1,7 @@
 
 # requires the OpenCL patches
-%define llvm_version 7.0.1-3
+%define llvm_version 7.0.1
+%define llvm_rpm_version %{llvm_version}-3
 
 %define spirv_llvm_translator_version 7.0.1
 
@@ -15,13 +16,11 @@ Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{ver
 Patch0:		llvm_clang_vfs.patch
 URL:		https://01.org/compute-runtime
 BuildRequires:	SPIRV-LLVM-Translator-devel >= %{spirv_llvm_translator_version}
-BuildRequires:	clang >= %{llvm_version}
-BuildRequires:	clang-devel >= %{llvm_version}
+BuildRequires:	clang >= %{llvm_rpm_version}
+BuildRequires:	clang-devel >= %{llvm_rpm_version}
 BuildRequires:	cmake >= 3.4.3
-BuildRequires:	llvm-devel >= %{llvm_version}
+BuildRequires:	llvm-devel >= %{llvm_rpm_version}
 BuildRequires:	pkgconfig
-%requires_eq	clang
-%requires_eq	clang-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,8 +32,7 @@ SPIR-V modules.
 Summary:	Header files for %{name} library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki %{name}
 Group:		Development/Libraries
-Requires:	clang-devel >= %{llvm_version}
-Requires:	llvm-devel >= %{llvm_version}
+%requires_eq	clang-devel
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
