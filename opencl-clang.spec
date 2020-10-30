@@ -1,18 +1,17 @@
 
 # requires the OpenCL patches
-%define llvm_version 10.0.0
+%define llvm_version 11.0.0
 
-%define spirv_llvm_translator_version 10.0.0
+%define spirv_llvm_translator_version 11.0.0
 
 Summary:	Intel Graphics Compute Runtime for OpenCL
 Name:		opencl-clang
-Version:	10.0.0
-Release:	2
+Version:	11.0.0
+Release:	1
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
 Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	a28bc82341f0ef4dbf749d2ee5e0a907
-Patch0:		llvm10.patch
+# Source0-md5:	31e0ca207e06d6bb1a49661cafd8a3ea
 URL:		https://01.org/compute-runtime
 BuildRequires:	SPIRV-LLVM-Translator-devel >= %{spirv_llvm_translator_version}
 BuildRequires:	clang >= %{llvm_rpm_version}
@@ -42,7 +41,6 @@ Pliki nagłówkowe biblioteki %{name}.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 install -d build
@@ -64,8 +62,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.10 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
-ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.10
+mv $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.11 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
+ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.11
 ln -sf libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so
 
 %post	-p /sbin/ldconfig
@@ -78,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md
 %attr(755,root,root) %{_libdir}/libopencl-clang.so.%{llvm_version}
-%ghost %attr(755,root,root) %{_libdir}/libopencl-clang.so.10
+%ghost %attr(755,root,root) %{_libdir}/libopencl-clang.so.11
 
 %files devel
 %defattr(644,root,root,755)
