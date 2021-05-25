@@ -7,7 +7,7 @@
 Summary:	Intel Graphics Compute Runtime for OpenCL
 Name:		opencl-clang
 Version:	11.0.0
-Release:	3
+Release:	4
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
 Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
