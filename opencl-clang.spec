@@ -22,6 +22,7 @@ BuildRequires:	clang-devel >= %{llvm_version}
 BuildRequires:	cmake >= 3.4.3
 BuildRequires:	llvm-devel >= %{llvm_version}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
