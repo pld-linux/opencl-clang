@@ -4,17 +4,14 @@
 
 %define spirv_llvm_translator_version 12.0.0
 
-%define	gitref	1d1829d930d31309c43512fc17ece51dd314ebde
-%define	snap	20210525
-
 Summary:	Intel Graphics Compute Runtime for OpenCL
 Name:		opencl-clang
 Version:	12.0.0
-Release:	0.%{snap}.1
+Release:	1
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
-Source0:	https://github.com/intel/opencl-clang/archive/%{gitref}/%{name}-%{snap}.tar.gz
-# Source0-md5:	aa6983d5d43d2d92727837a8c1669c9f
+Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	e8abbdba2d39f3f090d949dd8fc4737b
 URL:		https://01.org/compute-runtime
 BuildRequires:	SPIRV-LLVM-Translator-devel >= %{spirv_llvm_translator_version}
 BuildRequires:	clang >= %{llvm_rpm_version}
@@ -44,7 +41,7 @@ Header files for %{name} library.
 Pliki nagłówkowe biblioteki %{name}.
 
 %prep
-%setup -q -n %{name}-%{gitref}
+%setup -q
 
 %build
 install -d build
