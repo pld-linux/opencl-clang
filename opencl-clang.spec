@@ -1,13 +1,13 @@
 
 # requires the OpenCL patches
-%define llvm_version 14.0.0
-
-%define spirv_llvm_translator_version 14.0.0
+%define llvm_version			14.0.0
+%define spirv_llvm_translator_version	14.0.0
 
 Summary:	Intel Graphics Compute Runtime for OpenCL
+Summary(pl.UTF-8):	Biblioteki uruchomieniowe Intel Graphics Compute dla OpenCL
 Name:		opencl-clang
 Version:	14.0.0
-Release:	1
+Release:	2
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
 Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -26,6 +26,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Common clang is a thin wrapper library around clang. Common clang has
 OpenCL-oriented API and is capable to compile OpenCL C kernels to
 SPIR-V modules.
+
+%description -l pl.UTF-8
+Common clang to niewielka biblioteka obudowująca clanga. Ma API
+zorientowane na OpenCL i potrafi kompilować jądra C OpenCL do modułów
+WPIR-V
 
 %package devel
 Summary:	Header files for %{name} library
@@ -63,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.14 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.14 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
 ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.14
 ln -sf libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so
 
