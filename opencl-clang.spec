@@ -7,7 +7,7 @@ Summary:	Intel Graphics Compute Runtime for OpenCL
 Summary(pl.UTF-8):	Biblioteki uruchomieniowe Intel Graphics Compute dla OpenCL
 Name:		opencl-clang
 Version:	15.0.0
-Release:	2
+Release:	3
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
 Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
