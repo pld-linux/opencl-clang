@@ -1,22 +1,26 @@
 
 # requires the OpenCL patches
-%define llvm_version			15.0.0
-%define spirv_llvm_translator_version	15.0.0
+%define llvm_version			16.0.0
+%define spirv_llvm_translator_version	16.0.0
 
 Summary:	Intel Graphics Compute Runtime for OpenCL
 Summary(pl.UTF-8):	Biblioteki uruchomieniowe Intel Graphics Compute dla OpenCL
 Name:		opencl-clang
-Version:	15.0.0
-Release:	3
+Version:	16.0.0
+Release:	1
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
 Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	9c11f058256917e48f1be64fe4dc6666
+# Source0-md5:	f2eb3b9f9201349860f0e7ef0eb31d46
+Patch0:		cxx17.patch
+Patch1:		llvm16.patch
+Patch2:		soname.patch
+Patch3:		standalone.patch
 URL:		https://01.org/compute-runtime
 BuildRequires:	SPIRV-LLVM-Translator-devel >= %{spirv_llvm_translator_version}
 BuildRequires:	clang >= %{llvm_rpm_version}
 BuildRequires:	clang-devel >= %{llvm_version}
-BuildRequires:	cmake >= 3.4.3
+BuildRequires:	cmake >= 3.13.4
 BuildRequires:	llvm-devel >= %{llvm_version}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.605
@@ -47,6 +51,10 @@ Pliki nagłówkowe biblioteki %{name}.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 install -d build
@@ -68,8 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__mv} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.15 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
-ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.15
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.16 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
+ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.16
 ln -sf libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so
 
 %post	-p /sbin/ldconfig
@@ -82,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md
 %attr(755,root,root) %{_libdir}/libopencl-clang.so.%{llvm_version}
-%ghost %attr(755,root,root) %{_libdir}/libopencl-clang.so.15
+%ghost %attr(755,root,root) %{_libdir}/libopencl-clang.so.16
 
 %files devel
 %defattr(644,root,root,755)
