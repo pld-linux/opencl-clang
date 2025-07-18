@@ -1,17 +1,17 @@
 
 # requires the OpenCL patches
-%define llvm_version			19.1.0
-%define spirv_llvm_translator_version	19.1.0
+%define llvm_version			20.1.0
+%define spirv_llvm_translator_version	20.1.0
 
 Summary:	Intel Graphics Compute Runtime for OpenCL
 Summary(pl.UTF-8):	Biblioteki uruchomieniowe Intel Graphics Compute dla OpenCL
 Name:		opencl-clang
-Version:	19.1.0
-Release:	4
+Version:	20.1.0
+Release:	1
 License:	University of Illinois/NCSA Open Source License
 Group:		Libraries
 Source0:	https://github.com/intel/opencl-clang/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	d13adaabbcfe87744c9b783871390238
+# Source0-md5:	c69c4e697732ca8d087857842e9f4171
 URL:		https://01.org/compute-runtime
 BuildRequires:	SPIRV-LLVM-Translator-devel >= %{spirv_llvm_translator_version}
 BuildRequires:	clang >= %{llvm_rpm_version}
@@ -68,8 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__mv} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.19.1 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
-ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.19.1
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.20.1 $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.%{llvm_version}
+ln -s libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so.20.1
 ln -sf libopencl-clang.so.%{llvm_version} $RPM_BUILD_ROOT%{_libdir}/libopencl-clang.so
 
 %post	-p /sbin/ldconfig
@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md
 %attr(755,root,root) %{_libdir}/libopencl-clang.so.%{llvm_version}
-%ghost %attr(755,root,root) %{_libdir}/libopencl-clang.so.19.1
+%ghost %attr(755,root,root) %{_libdir}/libopencl-clang.so.20.1
 
 %files devel
 %defattr(644,root,root,755)
